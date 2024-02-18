@@ -1,38 +1,52 @@
 import readlineSync from 'readline-sync';
+import greeting from './cli.js';
+
+const generateRandomNum = () => {
+    return Math.round(Math.random(11) * 100);
+}
+
+const getAnswer = () => {
+    return readlineSync.question('Your answer: ');
+}
+
+const compareAnswers = () => {
+    if (correctAnswer === yourAnswer) {
+        console.log('Correct!');
+    } else {
+        console.log(`${yourAnswer} is wrong answer ;(. Correct answer was ${correctAnswer}.\nLet's try again, ${user}!`);
+        return false;
+    }
+}
+
+let correctAnswer;
+let yourAnswer;
+let user;
 
 const ifEven = () => {
 
-    console.log('Welcome to the Brain Games!');
-
-    const name = readlineSync.question('May I have your name? ');
-
-    console.log(`Hello, ${name}!`);
+    user = greeting();
 
     console.log('Answer "yes" if the number is even, otherwise answer "no".');
 
-    for (let i = 0; i < 3; i = i + 1) {
+    for (let i = 0; i < 3; i = i + 1) { 
 
-        let num = Math.round(Math.random(101) * 100);
+        let num = generateRandomNum();
 
         console.log(`Question: ${num}`);
 
-        const answer = readlineSync.question('Your answer: ');
-
-        if (num % 2 === 0 && answer === 'yes' || num % 2 !== 0 && answer === 'no') {
-            console.log('Correct!');
-        } else if (num % 2 === 0 && answer === 'no') {
-            console.log(`${answer} is wrong answer ;(. Correct answer was 'yes'.\nLet's try again, ${name}!`);
-            return false;
-        } else if (num % 2 !== 0 && answer === 'yes') {
-            console.log(`${answer} is wrong answer ;(. Correct answer was 'no'.\nLet's try again, ${name}!`);
-            return false;
+        if (num % 2 === 0) {
+            correctAnswer = 'yes';
         } else {
-            console.log(`${answer} is wrong answer ;(.\nLet's try again, ${name}!`);
-            return false;
+            correctAnswer = 'no';
         }
+
+        yourAnswer = getAnswer();
+
+        compareAnswers();
+
     }
 
-    console.log(`Congratulations, ${name}!`);
+    console.log(`Congratulations, ${user}!`);
 
 }
 

@@ -9,8 +9,8 @@ const findDivisor = () => {
   console.log('Find the greatest common divisor of given numbers.');
 
   for (let i = 0; i < 3; i += 1) {
-    const numberFirst = generateRandomNum();
-    const numberSecond = generateRandomNum();
+    const numberFirst = generateRandomNum(100);
+    const numberSecond = generateRandomNum(100);
     const array1 = [];
     const array2 = [];
     const array3 = [];

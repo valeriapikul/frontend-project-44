@@ -1,6 +1,8 @@
 import readlineSync from 'readline-sync';
 
-const generateRandomNum = () => Math.round(Math.random() * 100);
+const generateRandomNum = (placeNumber = 10) => Math.round(Math.random() * placeNumber);
+
+const generateRandomMinMax = (min, max) => Math.round(Math.random() * (max - min) + min);
 
 const getAnswer = () => readlineSync.question('Your answer: ');
 
@@ -24,5 +26,5 @@ const generateRandomOperator = () => {
 };
 
 export {
-  generateRandomNum, getAnswer, compareAnswers, congratulations, generateRandomOperator,
+  generateRandomNum, getAnswer, compareAnswers, congratulations, generateRandomOperator, generateRandomMinMax
 };

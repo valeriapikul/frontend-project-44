@@ -48,6 +48,7 @@ const findDivisor = () => {
   }
 
   congratulations(user);
+  return true;
 };
 
 export default findDivisor;

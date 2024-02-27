@@ -31,6 +31,7 @@ const ifEven = () => {
   }
 
   congratulations(user);
+  return true;
 };
 
 export default ifEven;

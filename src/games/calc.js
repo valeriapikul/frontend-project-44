@@ -27,6 +27,8 @@ const expression = () => {
       case '*':
         correctAnswer = numberFirst * numberSecond;
         break;
+      default:
+        return false;
     }
 
     console.log(`Question: ${expr}`);
@@ -41,6 +43,7 @@ const expression = () => {
   }
 
   congratulations(user);
+  return true;
 };
 
 export default expression;

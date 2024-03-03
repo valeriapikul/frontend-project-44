@@ -1,11 +1,8 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/valeriapikul/frontend-project-44/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/valeriapikul/frontend-project-44/actions)",
+  "description": "Project 'Mind games'",
   "main": "~/frontend-project-44/src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "valeria",
   "license": "ISC",
   "type": "module",
@@ -18,7 +15,6 @@
     "brain-prime": "bin/brain-prime.js"
   },
   "dependencies": {
-    "npm": "^10.4.0",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {

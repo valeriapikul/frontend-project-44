@@ -12,7 +12,7 @@ const runEngine = (rules, generateRound) => {
   for (let i = 0; i < roundsCount; i += 1) {
     const [question, answer] = generateRound();
 
-    console.log(question);
+    console.log(`Question: ${question}`);
 
     const userAnswer = readlineSync.question('Your answer: ');
 

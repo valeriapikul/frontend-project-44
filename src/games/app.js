@@ -8,7 +8,7 @@ getRandomInRange
 
 const generateRound = () => {
   const num = getRandomInRange();
-  const question = num;
+  const question = `${num}`;
   let answer;
 
   if (num % 2 === 0) {

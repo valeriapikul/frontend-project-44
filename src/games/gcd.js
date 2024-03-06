@@ -1,54 +1,52 @@
-import greeting from '../cli.js';
-import {
-  generateRandomNum, getAnswer, compareAnswers, congratulations,
-} from '../index.js';
+import
+runEngine
+  from '../index.js';
 
-const findDivisor = () => {
-  const user = greeting();
+import
+getRandomInRange
+  from '../utils.js';
 
-  console.log('Find the greatest common divisor of given numbers.');
+const getDivivsors = (num) => {
+  const array = [];
 
-  for (let i = 0; i < 3; i += 1) {
-    const numberFirst = generateRandomNum(100);
-    const numberSecond = generateRandomNum(100);
-    const array1 = [];
-    const array2 = [];
-    const array3 = [];
-
-    console.log(`Question: ${numberFirst} ${numberSecond}`);
-
-    for (let n = 1; n <= numberFirst; n += 1) {
-      if (numberFirst % n === 0) {
-        array1.push(n);
-      }
+  for (let i = 1; i <= num; i += 1) {
+    if (num % i === 0) {
+      array.push(i);
     }
-    for (let j = 1; j <= numberFirst; j += 1) {
-      if (numberSecond % j === 0) {
-        array2.push(j);
+  }
+  return array;
+};
+
+const compareArrays = (array1, array2) => {
+  const array3 = [];
+
+  for (let k = 0; k < array1.length; k += 1) {
+    for (let m = 0; m < array2.length; m += 1) {
+      if (array1[k] === array2[m]) {
+        array3.push(array1[k]);
       }
-    }
-
-    for (let k = 0; k < array1.length; k += 1) {
-      for (let m = 0; m < array2.length; m += 1) {
-        if (array1[k] === array2[m]) {
-          array3.push(array1[k]);
-        }
-      }
-    }
-
-    const correctAnswer = Math.max(...array3);
-
-    const yourAnswer = Number(getAnswer());
-
-    const isLose = compareAnswers(correctAnswer, yourAnswer, user);
-
-    if (isLose === false) {
-      return false;
     }
   }
 
-  congratulations(user);
-  return true;
+  return array3;
 };
 
-export default findDivisor;
+const generateRound = () => {
+  const num1 = getRandomInRange(1, 99);
+  const num2 = getRandomInRange(1, 99);
+
+  const array1 = getDivivsors(num1);
+  const array2 = getDivivsors(num2);
+
+  const array = compareArrays(array1, array2);
+
+  const question = `${num1} ${num2}`;
+  const answer = String(Math.max(...array));
+
+  return [question, answer];
+};
+
+export default () => {
+  const rules = 'Find the greatest common divisor of given numbers.';
+  runEngine(rules, generateRound);
+};

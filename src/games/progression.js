@@ -1,44 +1,34 @@
-import greeting from '../cli.js';
-import {
-  generateRandomNum, getAnswer, compareAnswers, congratulations, generateRandomMinMax,
-} from '../index.js';
+import
+runEngine
+  from '../index.js';
 
-const findMissingNum = () => {
-  const user = greeting();
+import
+getRandomInRange
+  from '../utils.js';
 
-  console.log('What number is missing in the progression?');
+const generateRound = () => {
+  const arr = [];
+  const start = getRandomInRange();
+  const step = getRandomInRange(1, 10);
+  const step2 = getRandomInRange(0, 9);
+  let progr;
 
-  for (let i = 0; i < 3; i += 1) {
-    const arr = [];
-    const start = generateRandomNum(100);
-    const step = generateRandomMinMax(1, 10);
-    const step2 = generateRandomNum(9);
-    let correctAnswer;
-
-    for (let j = start; j < start + step * 10; j += step) {
-      arr.push(j);
-    }
-
-    for (let k = 0; k < arr.length; k += 1) {
-      correctAnswer = arr[step2];
-    }
-
-    const str = arr.join(' ');
-    const repl = str.replace(correctAnswer, '..');
-
-    console.log(`Question: ${repl}`);
-
-    const yourAnswer = Number(getAnswer());
-
-    const isLose = compareAnswers(correctAnswer, yourAnswer, user);
-
-    if (isLose === false) {
-      return false;
-    }
+  for (let j = start; j < start + step * 10; j += step) {
+    arr.push(j);
   }
 
-  congratulations(user);
-  return true;
+  for (let k = 0; k < arr.length; k += 1) {
+    progr = arr[step2];
+  }
+
+  const str = arr.join(' ');
+  const question = str.replace(progr, '..');
+  const answer = String(progr);
+
+  return [question, answer];
 };
 
-export default findMissingNum;
+export default () => {
+  const rules = 'What number is missing in the progression?';
+  runEngine(rules, generateRound);
+};

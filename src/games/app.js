@@ -1,37 +1,26 @@
-import greeting from '../cli.js';
-import {
-  generateRandomNum, getAnswer, compareAnswers, congratulations,
-} from '../index.js';
+import
+runEngine
+  from '../index.js';
 
-const ifEven = () => {
-  const user = greeting();
+import
+getRandomInRange
+  from '../utils.js';
 
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
+const generateRound = () => {
+  const num = getRandomInRange();
+  const question = num;
+  let answer;
 
-  for (let i = 0; i < 3; i += 1) {
-    const num = generateRandomNum();
-
-    console.log(`Question: ${num}`);
-
-    let correctAnswer;
-
-    if (num % 2 === 0) {
-      correctAnswer = 'yes';
-    } else {
-      correctAnswer = 'no';
-    }
-
-    const yourAnswer = getAnswer();
-
-    const isLose = compareAnswers(correctAnswer, yourAnswer, user);
-
-    if (isLose === false) {
-      return false;
-    }
+  if (num % 2 === 0) {
+    answer = 'yes';
+  } else {
+    answer = 'no';
   }
 
-  congratulations(user);
-  return true;
+  return [question, answer];
 };
 
-export default ifEven;
+export default () => {
+  const rules = 'Answer "yes" if the number is even, otherwise answer "no".';
+  runEngine(rules, generateRound);
+};

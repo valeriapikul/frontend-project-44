@@ -1,49 +1,36 @@
-import greeting from '../cli.js';
-import {
-  generateRandomNum, getAnswer, compareAnswers, congratulations, generateRandomOperator,
-} from '../index.js';
+import
+runEngine
+  from '../index.js';
 
-const expression = () => {
-  const user = greeting();
+import
+getRandomInRange
+  from '../utils.js';
 
-  console.log('What is the result of the expression?');
-
-  for (let i = 0; i < 3; i += 1) {
-    const numberFirst = generateRandomNum();
-    const numberSecond = generateRandomNum();
-    const operator = generateRandomOperator();
-
-    const expr = `${numberFirst} ${operator} ${numberSecond}`;
-
-    let correctAnswer;
-
-    switch (operator) {
-      case '+':
-        correctAnswer = numberFirst + numberSecond;
-        break;
-      case '-':
-        correctAnswer = numberFirst - numberSecond;
-        break;
-      case '*':
-        correctAnswer = numberFirst * numberSecond;
-        break;
-      default:
-        return false;
-    }
-
-    console.log(`Question: ${expr}`);
-
-    const yourAnswer = Number(getAnswer());
-
-    const isLose = compareAnswers(correctAnswer, yourAnswer, user);
-
-    if (isLose === false) {
-      return false;
-    }
-  }
-
-  congratulations(user);
-  return true;
+const getRandomOperator = () => {
+  const operators = ['+', '-', '*'];
+  return operators[getRandomInRange(0, operators.length - 1)];
 };
 
-export default expression;
+const calculation = (num1, num2, operator) => {
+  switch (operator) {
+    case '+': return num1 + num2;
+    case '-': return num1 - num2;
+    case '*': return num1 * num2;
+    default: throw new Error(`Invalid operator - ${operator}`);
+  }
+};
+
+const generateRound = () => {
+  const num1 = getRandomInRange();
+  const num2 = getRandomInRange();
+  const operator = getRandomOperator();
+  const question = `${num1} ${operator} ${num2}`;
+  const answer = String(calculation(num1, num2, operator));
+
+  return [question, answer];
+};
+
+export default () => {
+  const rules = 'What is the result of the expression?';
+  runEngine(rules, generateRound);
+};

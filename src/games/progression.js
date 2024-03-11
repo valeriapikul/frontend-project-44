@@ -6,16 +6,23 @@ import
 getRandomInRange
   from '../utils.js';
 
+const generateProgression = (start, step, length) => {
+  const progression = [];
+
+  for (let i = 0; i < length; i += 1) {
+    progression.push(start + step * i);
+  }
+
+  return progression;
+};
+
 const generateRound = () => {
-  const arr = [];
   const start = getRandomInRange();
   const step = getRandomInRange(1, 10);
   const step2 = getRandomInRange(0, 9);
   let progr;
 
-  for (let j = start; j < start + step * 10; j += step) {
-    arr.push(j);
-  }
+  const arr = generateProgression(start, step, 10);
 
   for (let k = 0; k < arr.length; k += 1) {
     progr = arr[step2];

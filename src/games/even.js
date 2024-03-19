@@ -6,16 +6,13 @@ import
 getRandomInRange
   from '../utils.js';
 
+const isEven = (num) => num % 2 === 0;
+
 const generateRound = () => {
   const num = getRandomInRange();
   const question = num;
-  let answer;
 
-  if (num % 2 === 0) {
-    answer = 'yes';
-  } else {
-    answer = 'no';
-  }
+  const answer = isEven(num) ? 'yes' : 'no';
 
   return [question, answer];
 };
